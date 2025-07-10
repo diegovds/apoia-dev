@@ -1,8 +1,15 @@
 import { FeatureCard } from '@/components/FeatureCard'
 import { Button } from '@/components/ui/button'
+import { signIn } from '@/lib/auth'
 import { ArrowRight, HandCoins, Heart, Shield, Zap } from 'lucide-react'
 
 export default function Home() {
+  const handleRegister = async () => {
+    'use server'
+
+    await signIn('github', { redirectTo: '/dashboard' })
+  }
+
   return (
     <div className="flex min-h-screen flex-col bg-gradient-to-b from-white to-gray-50">
       <header className="container mx-auto px-4 py-6">
@@ -32,7 +39,7 @@ export default function Home() {
               </p>
 
               <div className="pt-4">
-                <form>
+                <form action={handleRegister}>
                   <Button
                     type="submit"
                     size="lg"
