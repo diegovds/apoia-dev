@@ -20,6 +20,8 @@ model User {
   email         String          @unique
   emailVerified DateTime?
   image         String?
+  username      String?         @unique
+  bio           String?
   accounts      Account[]
   sessions      Session[]
   // Optional for WebAuthn support
@@ -27,6 +29,28 @@ model User {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  donations Donation[]
+}
+
+model Donation {
+  id           String        @id @default(cuid())
+  amount       Int
+  donorName    String //nome do doador
+  donorMessage String //mensagem do doador
+  status       PaymentStatus @default(PENDING)
+  userId       String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
 }
 
 model Account {
@@ -83,4 +107,3 @@ model Authenticator {
 
   @@id([userId, credentialID])
 }
-
