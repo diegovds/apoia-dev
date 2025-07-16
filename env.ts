@@ -7,6 +7,9 @@ const envSchema = z.object({
   DATABASE_URL: z.string(),
   NEXT_PUBLIC_HOST_URL: z.string(),
   HOST_URL: z.string(),
+  NEXT_PUBLIC_STRIPE_PUBLIC_KEY: z.string(),
+  STRIPE_SECRET_KEY: z.string(),
+  STRIPE_WEBHOOK_SECRET: z.string(),
 })
 
 export const env = envSchema.parse(process.env)
