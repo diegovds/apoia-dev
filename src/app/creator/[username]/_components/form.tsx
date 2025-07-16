@@ -2,12 +2,12 @@
 
 import { Button } from '@/components/ui/button'
 import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -19,10 +19,13 @@ import { z } from 'zod'
 import { createPayment } from '../_actions/create-payment'
 
 const formSchema = z.object({
-  name: z.string().min(1).max(15, 'Nome deve ter entre 1 e 15 caracteres'),
+  name: z
+    .string()
+    .min(1, 'Nome deve ter pelo menos 1 caractere')
+    .max(15, 'Nome deve ter até 15 caracteres'),
   message: z
     .string()
-    .min(1)
+    .min(1, 'Mensagem deve ter no minimo 1 caractere')
     .max(200, 'Mensagem deve ter no máximo 200 caracteres'),
   price: z.enum(['15', '25', '35'], {
     required_error: 'O valor é obrigatório',
