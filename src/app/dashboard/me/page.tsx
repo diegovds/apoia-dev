@@ -1,5 +1,6 @@
 import { auth } from '@/lib/auth'
 import { redirect } from 'next/navigation'
+import { CardProfile } from './_components/card-profile'
 import { UrlPreview } from './_components/url'
 
 export default async function Me() {
@@ -22,6 +23,8 @@ export default async function Me() {
       <section className="mx-auto flex w-full flex-col gap-2 rounded-md bg-zinc-900 p-4 lg:flex-row lg:items-center">
         <UrlPreview username={userData.username} />
       </section>
+
+      <CardProfile user={userData} />
     </main>
   )
 }
