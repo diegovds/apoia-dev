@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Link2 } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
+import { env } from '../../../../../env'
 import { createUsername } from '../_actions/create-username'
 
 interface UrlPreviewProps {
@@ -39,7 +40,7 @@ export function UrlPreview({ username: slug }: UrlPreviewProps) {
         <div className="flex flex-col items-start justify-center gap-2 md:flex-row md:items-center">
           <h3 className="text-lg font-bold">Sua URL:</h3>
           <Link href={`/creator/${username}`} target="_blank">
-            {process.env.NEXT_PUBLIC_HOST_URL}/creator/{username}
+            {env.NEXT_PUBLIC_HOST_URL}/creator/{username}
           </Link>
         </div>
         <Link
@@ -61,7 +62,7 @@ export function UrlPreview({ username: slug }: UrlPreviewProps) {
           className="flex flex-1 flex-col items-start gap-4 md:flex-row md:items-center"
         >
           <div className="flex w-full items-center justify-center">
-            <p className="">{process.env.NEXT_PUBLIC_HOST_URL}/creator/</p>
+            <p className="">{env.NEXT_PUBLIC_HOST_URL}/creator/</p>
             <input
               type="text"
               className="h-9 flex-1 rounded-md border border-gray-300 bg-gray-50 px-1 text-black outline-none"
