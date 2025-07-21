@@ -4,8 +4,9 @@ import { Button } from '@/components/ui/button'
 import { Link2 } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
-import { env } from '../../../../../env'
+
 import { createUsername } from '../_actions/create-username'
+import { env } from '../../../../../env-public'
 
 interface UrlPreviewProps {
   username: string | null

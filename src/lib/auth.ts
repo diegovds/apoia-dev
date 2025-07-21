@@ -1,7 +1,7 @@
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import NextAuth from 'next-auth'
 import GitHub from 'next-auth/providers/github'
-import { env } from '../../env'
+import { env } from '../../env-server'
 import { prisma } from './prisma'
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
