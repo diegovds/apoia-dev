@@ -21,13 +21,6 @@ export async function getInfoUser(data: CreateUsernameSchema) {
       where: {
         username: data.username,
       },
-      select: {
-        id: true,
-        name: true,
-        username: true,
-        image: true,
-        bio: true,
-      },
     })
 
     return user
