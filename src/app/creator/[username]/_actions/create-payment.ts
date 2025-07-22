@@ -5,7 +5,7 @@ import { stripe } from '@/lib/stripe'
 import { z } from 'zod'
 import { env } from '../../../../../env-server'
 
-const createUsernameSchema = z.object({
+const createPaymentSchema = z.object({
   slug: z.string().min(1, 'Slug do creator é obrigatório'),
   name: z.string().min(1, 'Nome é obrigatório'),
   message: z
@@ -16,10 +16,10 @@ const createUsernameSchema = z.object({
   creatorId: z.string(),
 })
 
-type CreatePaymentSchema = z.infer<typeof createUsernameSchema>
+type CreatePaymentSchema = z.infer<typeof createPaymentSchema>
 
 export async function createPayment(data: CreatePaymentSchema) {
-  const schema = createUsernameSchema.safeParse(data)
+  const schema = createPaymentSchema.safeParse(data)
 
   if (!schema.success) {
     return {
@@ -29,18 +29,20 @@ export async function createPayment(data: CreatePaymentSchema) {
 
   if (!data.creatorId) {
     return {
-      error: 'Criador não encontrado',
+      error: 'Falha ao criar o pagamento, tente mais tarde.',
     }
   }
 
   try {
     const creator = await prisma.user.findFirst({
-      where: { connectedStripeAccountId: data.creatorId },
+      where: {
+        connectedStripeAccountId: data.creatorId,
+      },
     })
 
     if (!creator) {
       return {
-        error: 'Criador não encontrado',
+        error: 'Falha ao criar o pagamento, tente mais tarde.',
       }
     }
 
@@ -66,7 +68,7 @@ export async function createPayment(data: CreatePaymentSchema) {
           price_data: {
             currency: 'brl',
             product_data: {
-              name: `Apoio a ${creator.name}`,
+              name: 'Apoiar ' + creator.name,
             },
             unit_amount: data.price,
           },
@@ -89,9 +91,9 @@ export async function createPayment(data: CreatePaymentSchema) {
     return {
       sessionId: session.id,
     }
-  } catch (error) {
+  } catch (err) {
     return {
-      error: 'Erro ao criar pagamento. Tente novamente mais tarde.',
+      error: 'Falha ao criar o pagamento, tente mais tarde.',
     }
   }
 }
