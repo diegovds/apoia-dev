@@ -1,9 +1,18 @@
 import { auth } from '@/lib/auth'
+import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { Stats } from './_components/analytics'
 import CreateAccountButton from './_components/create-account-button'
 import { DonationTable } from './_components/donates'
 import { getLoginOnboardAccount } from './_data-access/create-onboard-account'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const session = await auth()
+
+  return {
+    title: `Dashboard - ${session?.user?.name || 'Sem nome'}`,
+  }
+}
 
 export default async function Dashboard() {
   const session = await auth()

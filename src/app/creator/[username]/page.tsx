@@ -1,14 +1,27 @@
+import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import AboutSection from './_components/about-section'
 import CoverSection from './_components/cover-section'
 import { FormDonate } from './_components/form'
 import { getInfoUser } from './_data-access/get-info-user'
 
-export default async function Apoia({
-  params,
-}: {
+interface ApoiaProps {
   params: Promise<{ username: string }>
-}) {
+}
+
+export async function generateMetadata({
+  params,
+}: ApoiaProps): Promise<Metadata> {
+  const { username } = await params
+
+  const user = await getInfoUser({ username })
+
+  return {
+    title: `Doação - ${user?.name || 'Sem nome'}`,
+  }
+}
+
+export default async function Apoia({ params }: ApoiaProps) {
   const { username } = await params
 
   const user = await getInfoUser({ username })

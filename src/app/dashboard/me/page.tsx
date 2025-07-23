@@ -1,7 +1,16 @@
 import { auth } from '@/lib/auth'
+import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { CardProfile } from './_components/card-profile'
 import { UrlPreview } from './_components/url'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const session = await auth()
+
+  return {
+    title: `Perfil - ${session?.user?.name || 'Sem nome'}`,
+  }
+}
 
 export default async function Me() {
   const session = await auth()

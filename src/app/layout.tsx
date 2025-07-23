@@ -15,8 +15,11 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'ApoiaDev',
-  description: 'Plataforma para criadores de conteúdo',
+  title: {
+    default: 'ApoiaDev',
+    template: '%s | ApoiaDev',
+  },
+  description: 'Plataforma de doação para criadores de conteúdo',
 }
 
 export default function RootLayout({
