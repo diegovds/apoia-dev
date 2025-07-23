@@ -1,5 +1,3 @@
-'use client'
-
 import { HandCoins } from 'lucide-react'
 import Link from 'next/link'
 import { LogoutButton } from './logout-button'
