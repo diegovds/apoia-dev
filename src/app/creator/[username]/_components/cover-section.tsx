@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { AvatarIcon } from '@/components/avatar-icon'
 import Image from 'next/image'
 
 interface CoverSectionProps {
@@ -27,18 +27,7 @@ export default function CoverSection({
         <div className="container mx-auto max-w-6xl">
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-end sm:gap-6">
             <div className="relative flex-shrink-0">
-              <Avatar className="group h-20 w-20 border-2 border-white shadow-2xl sm:h-24 sm:w-24 md:h-32 md:w-32 md:border-4">
-                <AvatarImage
-                  src={profileImage}
-                  className="duration-300 group-hover:scale-125 group-hover:-rotate-6"
-                />
-                <AvatarFallback className="text-lg font-bold md:text-xl">
-                  {name
-                    .split(' ')
-                    .map((n) => n[0])
-                    .join('')}
-                </AvatarFallback>
-              </Avatar>
+              <AvatarIcon name={name} profileImage={profileImage} />
             </div>
             <div className="pb-0 sm:pb-4">
               <h1 className="text-center text-2xl font-bold text-white sm:text-left sm:text-3xl md:text-4xl">
