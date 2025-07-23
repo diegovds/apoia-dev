@@ -89,7 +89,7 @@ export function UserDataForm({ name, bio }: UserDataFormProps) {
           return
         }
         form.reset(form.getValues())
-        toast.success('Biografia alterado com sucesso!')
+        toast.success('Biografia alterada com sucesso!')
       } catch (error) {
         toast.error('Erro ao alterar a biografia. Tente novamente.')
       }
