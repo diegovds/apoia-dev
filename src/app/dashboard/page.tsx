@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import { Stats } from './_components/analytics'
 import CreateAccountButton from './_components/create-account-button'
 import { DonationTable } from './_components/donates'
-import { getLoginOnboardAccount } from './_data-access/create-onboard-account'
+import { getStripeDashboard } from './_data-access/get-stripe-dashboard'
 
 export async function generateMetadata(): Promise<Metadata> {
   const session = await auth()
@@ -21,7 +21,7 @@ export default async function Dashboard() {
     redirect('/')
   }
 
-  const accountUrl = await getLoginOnboardAccount(
+  const urlStripeDashboard = await getStripeDashboard(
     session.user.connectedStripeAccountId,
   )
 
@@ -31,9 +31,9 @@ export default async function Dashboard() {
         <div className="flex w-full items-center justify-between gap-2">
           <h1 className="text-2xl font-semibold">Minha conta</h1>
 
-          {accountUrl && (
+          {urlStripeDashboard && (
             <a
-              href={accountUrl}
+              href={urlStripeDashboard}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-md bg-zinc-900 px-4 py-1 text-white transition-colors hover:bg-zinc-800"
