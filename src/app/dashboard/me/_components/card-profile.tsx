@@ -1,6 +1,5 @@
-import Image from 'next/image'
-import { Description } from './description'
-import { Name } from './name'
+import { AvatarIcon } from '@/components/avatar-icon'
+import { UserDataForm } from './form'
 
 interface CardProfileProps {
   user: {
@@ -14,23 +13,12 @@ interface CardProfileProps {
 
 export function CardProfile({ user }: CardProfileProps) {
   return (
-    <section className="mx-auto flex w-full flex-col items-center px-4">
+    <section className="mx-auto flex w-full flex-col items-center gap-4 px-4">
       <div className="">
-        <Image
-          src={user.image ?? ''}
-          alt="Foto de perfil"
-          width={104}
-          height={104}
-          priority
-          quality={100}
-          className="rounded-xl border-4 border-white bg-gray-50 object-cover transition-shadow duration-300 hover:shadow-xl"
-        />
+        <AvatarIcon profileImage={user.image ?? ''} name={user.name ?? '...'} />
       </div>
-      <div>
-        <Name initialName={user.name ?? 'Digite seu nome...'} />
-        <Description
-          initialDescription={user.bio ?? 'Digite sua biografia...'}
-        />
+      <div className="w-full sm:w-[500px]">
+        <UserDataForm name={user.name} bio={user.bio} />
       </div>
     </section>
   )
