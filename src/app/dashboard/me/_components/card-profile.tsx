@@ -17,7 +17,7 @@ export function CardProfile({ user }: CardProfileProps) {
     <section className="mx-auto flex w-full flex-col items-center px-4">
       <div className="">
         <Image
-          src={user.image ?? 'https://github.com/diegovds.png'}
+          src={user.image ?? ''}
           alt="Foto de perfil"
           width={104}
           height={104}
