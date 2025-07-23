@@ -1,6 +1,8 @@
-import { Button } from '@/components/ui/button'
-import { HandCoins, LogOut } from 'lucide-react'
+'use client'
+
+import { HandCoins } from 'lucide-react'
 import Link from 'next/link'
+import { LogoutButton } from './logout-button'
 import { MobileMenu } from './menu-mobile'
 
 export function Header() {
@@ -31,14 +33,7 @@ export function Header() {
             Meu perfil
           </Link>
 
-          <Button
-            variant="ghost"
-            size="icon"
-            className="text-red-500 hover:bg-red-50 hover:text-red-600"
-          >
-            <LogOut className="h-5 w-5" />
-            <span className="sr-only">Sair</span>
-          </Button>
+          <LogoutButton />
         </nav>
 
         <MobileMenu />

@@ -3,9 +3,10 @@
 import { Button } from '@/components/ui/button'
 import { DialogTitle } from '@/components/ui/dialog'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { LogOut, Menu } from 'lucide-react'
+import { Menu } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
+import { LogoutButtonMobile } from './logout-button-mobile'
 
 export function MobileMenu() {
   const [open, setOpen] = useState(false)
@@ -37,13 +38,7 @@ export function MobileMenu() {
             Meu perfil
           </Link>
 
-          <Button
-            variant="ghost"
-            className="cursor-pointer justify-start px-0 text-red-500 hover:bg-transparent hover:text-red-600"
-          >
-            <LogOut className="mr-2 h-4 w-4" />
-            Sair
-          </Button>
+          <LogoutButtonMobile />
         </div>
       </SheetContent>
     </Sheet>
