@@ -53,7 +53,7 @@ export default async function Dashboard() {
             userId={session.user.id}
             stripeAccountId={session.user.connectedStripeAccountId}
           />
-          <DonationTable userId={session.user.id} />
+          <DonationTable />
         </>
       )}
     </div>
