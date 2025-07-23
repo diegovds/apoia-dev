@@ -1,3 +1,4 @@
+import { QueryClientContext } from '@/providers/queryclient'
 import type { Metadata } from 'next'
 import { SessionProvider } from 'next-auth/react'
 import { Geist, Geist_Mono } from 'next/font/google'
@@ -33,15 +34,17 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SessionProvider>
-          {children}
-          <Toaster
-            duration={3000}
-            toastOptions={{
-              style: {
-                fontFamily: 'var(--font-geist-sans)',
-              },
-            }}
-          />
+          <QueryClientContext>
+            {children}
+            <Toaster
+              duration={3000}
+              toastOptions={{
+                style: {
+                  fontFamily: 'var(--font-geist-sans)',
+                },
+              }}
+            />
+          </QueryClientContext>
         </SessionProvider>
       </body>
     </html>
