@@ -7,18 +7,16 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { formatCurrency, formatDate } from '@/utils/format'
+import getDonates from '../_data-access/get-donates'
 
-const donations = [
-  {
-    id: '1',
-    donorName: 'João Silva',
-    donorMessage: 'Adoro seu trabalho!',
-    amount: 1000,
-    createdAt: new Date('2023-10-01T12:00:00Z'),
-  },
-]
+export async function DonationTable({ userId }: { userId: string }) {
+  const { donates, error } = await getDonates(userId)
 
-export function DonationTable() {
+  if (error) {
+    return null
+  }
+
   return (
     <>
       {/* Versão para desktop */}
@@ -41,7 +39,7 @@ export function DonationTable() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {donations.map((donation) => (
+            {donates?.map((donation) => (
               <TableRow key={donation.id}>
                 <TableCell className="font-medium">
                   {donation.donorName}
@@ -49,9 +47,11 @@ export function DonationTable() {
                 <TableCell className="max-w-72">
                   {donation.donorMessage}
                 </TableCell>
-                <TableCell className="text-center">{donation.amount}</TableCell>
                 <TableCell className="text-center">
-                  {donation.createdAt.toDateString()}
+                  {formatCurrency(donation.amount)}
+                </TableCell>
+                <TableCell className="text-center">
+                  {formatDate(donation.createdAt)}
                 </TableCell>
               </TableRow>
             ))}
@@ -61,7 +61,7 @@ export function DonationTable() {
 
       {/* Versão para mobile */}
       <div className="space-y-4 lg:hidden">
-        {donations.map((donation) => (
+        {donates?.map((donation) => (
           <Card key={donation.id}>
             <CardHeader>
               <CardTitle className="text-lg">{donation.donorName}</CardTitle>
@@ -72,10 +72,10 @@ export function DonationTable() {
               </p>
               <div className="flex items-center justify-between">
                 <span className="font-semibold text-green-500">
-                  {donation.amount}
+                  {formatCurrency(donation.amount)}
                 </span>
                 <span className="text-muted-foreground text-sm">
-                  {donation.createdAt.toDateString()}
+                  {formatDate(donation.createdAt)}
                 </span>
               </div>
             </CardContent>
